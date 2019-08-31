@@ -1,6 +1,5 @@
 <html lang="en">
 <head>
-    {% load staticfiles %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Home</title>
@@ -37,44 +36,41 @@
                 <div class="navbar-nav ml-auto">
                     <a class="nav-item nav-link" href="#">Twitter</a>
                     <a class="nav-item nav-link" href="#">Resume</a>
-                    <a class="nav-item nav-link" href="#">Blog</a>
+                    <a class="nav-item nav-link active" href="#">Blog</a>
                 </div>
             </div>
         </nav>
     </header>
 
     <main role="main">
-        <section class="jumbotron text-center">
-            <div class="container">
-                <h1 class="jumbotron-heading">Hi, I'm Tomas.</h1>
-                <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-                <p>
-                <a href="mailto:tomasluquegonzalez@gmail.com" class="btn btn-primary my-2">Email me</a>
-                </p>
-            </div>
-        </section>
-
-        <div class="album py-5 bg-light">
-            <div class="container">
+        <div class="container">
+            <h1 class="text-center pt-3">Blog</h1>
+            <br>
+            <br>
+            <h2>Latest Post</h2>
+            <hr>
+            {% for post in blog.all %}
+            <div>
                 <div class="row">
-                    {% for job in jobs.all %}
+                    <h3><a href="#">{{post.title}}</a></h3>
+                </div>
+                <div class="row">
+                    <h4><small>{{post.pub_date_pretty}}</small></h4>
+                </div>
+                <div class="row">
                     <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
-                            <img src="{{job.image.url}}" alt="" class="card-img-top">
-                            <div class="card-body">
-                                <p class="card-text">{{job.summary}}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">9 mins</small>
-                                </div>
-                            </div>
-                        </div>
+                        <img src="{{post.image.url}}" class="card-img-top">
                     </div>
-                    {% endfor %}
-
+                </div>
+                <div class="row mt-3">
+                    <div>
+                        <p>{{post.summary}}</p>
+                    </div>
                 </div>
 
-
             </div>
+            <hr>
+            {% endfor %}
         </div>
     </main>
 
