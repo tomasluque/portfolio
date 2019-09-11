@@ -4,92 +4,104 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Home</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
-    <style>
-        .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-            }
-        }
-    </style>
-    <!-- Custom styles for this template -->
-    <link href="album.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">      
+    <link rel="stylesheet" href="{% static 'css/materialize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jobStyle.css' %}">
+    <script src="{% static 'js/vue.js' %}"></script>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="{% url 'home' %}">Tomas Luque</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link" href="https://twitter.com/T_LuGon" target="_blank">Twitter</a>
-                    <a class="nav-item nav-link" href="{% static 'resume.pdf' %}" target="_blank">Resume</a>
-                    <a class="nav-item nav-link" href="{% url 'allblogs' %}">Blog</a>
-                </div>
+        <nav>
+            <div class="nav-wrapper container">
+                <a class="brand-logo" href="{% url 'home' %}">Tomas Luque</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="https://twitter.com/T_LuGon" target="_blank">Twitter</a></li>
+                        <li><a href="{% static 'resume.pdf' %}" target="_blank">Resume</a></li>
+                        <li><a href="{% url 'allblogs' %}">Blog</a></li>
+                </ul>                
             </div>
         </nav>
     </header>
 
-    <main role="main">
-        <section class="jumbotron text-center">
-            <div class="container">
-                <h1 class="jumbotron-heading">Hi, I'm Finn.</h1>
-                <p class="lead text-muted">
-                        Les lapins nains sont des lapins issus de la sélection au sein d'élevages des lapins de petite taille de race hermine. Comme tous les lapins domestiques ils sont tous issus du Lapin européen (Oryctolagus cuniculus). Les races naines ont été créées pour l'agrément, comme animal de compagnie ou de concours. Ce sont des lapins pesant moins de 1,5 kg, souvent moins prolifiques et plus fragiles que les lapins ordinaires.
-                </p>
-                <p>
-                <a href="mailto:tomasluquegonzalez@gmail.com" class="btn btn-primary my-2">Email me</a>
-                </p>
-                <img src="{% static 'finn.jpg' %}" alt="myself" width="300px">
-            </div>
-        </section>
+    <main role="main" id="app">
+        <div class="container center-align">
+            
+            
 
-        <div class="album py-5 bg-light">
-            <div class="container">
+            <div class="section">
+                <h1>Hi, I'm Finn.</h1>
+                <p class="flow-text">
+                    Les lapins nains sont des lapins issus de la sélection au sein d'élevages des lapins de petite taille de race hermine. Comme tous les lapins domestiques ils sont tous issus du Lapin européen (Oryctolagus cuniculus). Les races naines ont été créées pour l'agrément, comme animal de compagnie ou de concours. Ce sont des lapins pesant moins de 1,5 kg, souvent moins prolifiques et plus fragiles que les lapins ordinaires.
+                </p>
+                <div class="divider"></div>
+            </div>
+
+            <div class="section">
+                <p>
+                    <a href="mailto:tomasluquegonzalez@gmail.com" target="_blank" class="cyan darken-1 waves-effect waves-light btn btn-large"
+                    v-bind:class="{ pulse: isMoving }"
+                    ><i class="large material-icons right">email</i>Email me</a>
+                </p> 
+                <p>
+                    <button
+                        v-if="isMoving" 
+                        class="red waves-effect waves-light btn-floating btn-small"
+                        @click="isMoving = !isMoving"
+                    ><i class="material-icons">pause</i></button>
+                    
+                    <button
+                        v-if="!isMoving" 
+                        class="green waves-effect waves-light btn-floating btn-small"
+                        @click="isMoving = !isMoving"
+                    ><i class="material-icons">play_arrow</i></button>
+                </p>
+            </div>            
+            <div class="section">
+                <div class="row">
+                    <div class="col s6 offset-s3">
+                        <img src="{% static 'tom.jpg' %}" alt="myself" class="responsive-img circle">
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+             
+            <div class="section">
                 <div class="row">
                     {% for job in jobs.all %}
-                    <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
-                            <img src="{{job.image.url}}" alt="" class="card-img-top">
-                            <div class="card-body">
-                                <p class="card-text">{{job.summary}}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">9 mins</small>
-                                </div>
+
+                    <div class="col s4"> 
+                        <div class="card hoverable">
+                            <div class="card-image">
+                                <img src="{{job.image.url}}">
+                                <span class="card-title">Word Counter</span>
+                                <a class="btn-floating halfway-fab waves-effect waves-light amber"><i class="material-icons">link</i></a>
                             </div>
-                        </div>
+                            <div class="card-content">
+                                <p>{{job.summary}}</p>
+                            </div>
+                        </div>  
                     </div>
-                    {% endfor %}
 
+                {% endfor %}    
                 </div>
-
-
             </div>
         </div>
     </main>
 
-    <footer class="text-muted">
-        <div class="container text-center">
+    <footer class="center-align">
+        <div>
             <p>© TLG {% now 'Y' %}</p>
         </div>
     </footer>
     
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
+    <script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isMoving: true
+            }
+        });
+    </script>
 </body>
 </html>
