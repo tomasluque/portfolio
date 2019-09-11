@@ -36,7 +36,7 @@
             <div class="section">
                 <div class="row">
                     <div class="col s12">
-                        <form action="{% url 'count' %}">
+                        <form action="{% url 'count' %}" id="myForm">
                             <div class="row">
                                 <div class="input-field col s8 offset-s2">
                                     <label for="fulltext">Your text</label>
@@ -44,11 +44,48 @@
                                     <button class="btn waves-effect waves-light" type="submit" name="action">Count !
                                         <i class="material-icons right">send</i>
                                     </button>
+                                    <a class="waves-effect waves-teal btn-flat modal-trigger right cyan-text text-darken-4" href="#myModal">About</a>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col s12 center-align">                       
+                        
+                        <button 
+                            class="btn waves-effect waves-dark green" 
+                            name="action"
+                            onclick="writeUp()">                            
+                            Random Text About Rabbits<i class="material-icons right">help_outline</i><i class="material-icons left">help_outline</i>
+                        </button>
+                                              
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <h4 class="cyan-text text-darken-3">About This App</h4>
+                <div class="divider"></div>
+                <p class="cyan-text text-darken-4">First, this section exists purely to showcase a modal, because modals are cool. <br>   
+                    <small>This little box popping-up the screen, that's a modal by the way.</small>
+                </p>
+                <p class="cyan-text text-darken-4">
+                        Seriously though, this app is just a lightweigth word counter made with <em>Django</em> and <a target="_blank" href="https://materializecss.com"><em>Materialize</em></a> <small>(for the front-end stuff)</small>.
+                        It was mostly made for fun and was my first app using Python.
+                </p>
+                <p class="cyan-text text-darken-4">
+                    Thank you for using it !
+                </p>         
+                
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
             </div>
         </div>
 
@@ -62,6 +99,19 @@
     </footer>
     
     <script src="{% static 'js/materialize.js' %}"></script>
-
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            var elem = document.querySelectorAll('#myModal');
+            var instance = M.Modal.init(elem);
+        });   
+    </script>
+    <script>        
+        const writeUp = () => {
+            var field = document.getElementById('fulltext');
+            var form = document.getElementById('myForm')
+            field.value = "Dwarf rabbit refers either to a rabbit with the dwarfing gene, or to any small breed of domestic rabbit or specimen thereof, or to any small rabbit. Dwarfism is a genetic condition that may occur in humans and in many animals, including rabbits. True dwarfism is often associated with a cluster of physical abnormalities, including pituitary dwarfism. The process of dwarfing is used to selectively breed for smaller stature with each generation. Small stature is a characteristic of neoteny, which may account (in part) for the attraction of dwarf animals.";
+            form.submit();
+        }     
+    </script>
 </body>
 </html>
