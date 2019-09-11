@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-import operator
+import operator, re
 
 
 def home(request):
@@ -12,7 +12,8 @@ def count(request):
     worddictionary = {}
 
     for word in wordlist:
-        value = word.lower()
+        string = re.sub('[^A-Za-z0-9]+', '', word)
+        value = string.lower()
         if value in worddictionary:
             worddictionary[value] += 1
         else:
