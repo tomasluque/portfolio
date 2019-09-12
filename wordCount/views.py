@@ -19,9 +19,12 @@ def count(request):
         else:
             worddictionary[value] = 1
     sortedwords = sorted(worddictionary.items(), key=operator.itemgetter(1), reverse=True)
+    previewList = sortedwords[:10]
+    fullList = sortedwords[10:]
 
     return render(request, 'wordCount/count.html', {
         'fulltext': fulltext, 
         'count': len(wordlist), 
-        'sortedwords': sortedwords
+        'fullList': fullList,
+        'previewList': previewList
         }) 

@@ -1,23 +1,112 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>wordCount</title>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Word Counter</title>
+	
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">      
+	
+	<link rel="stylesheet" href="{% static 'css/materialize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jobStyle.css' %}">
 </head>
 <body>
-    <h1>There are {{ count }} words in your text</h1>
+    <header>
+        <nav>
+            <div class="nav-wrapper container">
+                <a class="brand-logo" href="{% url 'home' %}">Tomas Luque</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="https://twitter.com/T_LuGon" target="_blank">Twitter</a></li>
+                        <li><a href="{% static 'resume.pdf' %}" target="_blank">Resume</a></li>
+                        <li><a href="{% url 'allblogs' %}">Blog</a></li>
+                </ul>                
+            </div>
+        </nav>
+    </header>
 
-    <a href="{% url 'home' %}"><button>Start Again</button></a>
+    <main id="app">       
+        <div class="container">
+            <div class="row">
+                <div class="col s7">
+                    <div class="row">
+                        <div class="col s12">
+                            <h1>There are {{ count }} words in your text</h1>
 
-    <h1>Your Text:</h1>
-    {{ fulltext }}
+                            <a href="{% url 'words' %}"><button>Start Again</button></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <h1>Your Text:</h1>
+                            <blockquote style="text-align: justify;">{{ fulltext }}</blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s5">
+                    <div class="row">
+                        <div class="col s12">
+                            <h1 class="center-align">Word Count</h1>
 
-    <h1>Word Count</h1>
-    {% for word, count in sortedwords %}
-        {{ word }} - {{ count }} <br>
-    {% endfor %}
+                            <table class="highlight centered" style="table-layout: fixed">
+                            {% for word, count in previewList %}
+                                <tr>
+                                    <td class="flow-text">{{ word }}</td>
+                                    <td class="flow-text">{{ count }}</td>
+                                </tr>
+                            {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                
+                    {% if fullList %}
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="section center-align">
+                                <button class="waves-effect waves-light btn-large" @click="toggle">Show [[ btnText ]]</button>
+                            </div>
+                            <div class="section" v-if="isShowing">
+                                    <table class="highlight centered" style="table-layout: fixed">
+                                    {% for word, count in fullList %}
+                                        <tr>
+                                            <td class="flow-text">{{ word }}</td>
+                                            <td class="flow-text">{{ count }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </table>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>  
+        </div>
+    </main>
 
+
+	<footer class="center-align">
+			<div>
+				<p>© TLG {% now 'Y' %}</p>
+			</div>
+    </footer>
+    
+    <script src="{% static 'js/materialize.js' %}"></script>
+    <script src="{% static 'js/vue.js' %}"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            delimiters: ['[[',']]'],
+            data: {
+                'isShowing': false,
+                'btnText': 'More'
+            },
+            methods: {
+                toggle: function() {
+                    this.isShowing = !this.isShowing;
+                    if (this.btnText=='More') { this.btnText = 'Less' }
+                    else { this.btnText = 'More' }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
