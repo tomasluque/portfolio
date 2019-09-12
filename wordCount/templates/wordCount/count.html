@@ -30,28 +30,32 @@
                 <div class="col s7">
                     <div class="row">
                         <div class="col s12">
-                            <h1>There are {{ count }} words in your text</h1>
-
-                            <a href="{% url 'words' %}"><button>Start Again</button></a>
+                            <div class="center-align">
+                                <h2 class="cyan-text text-darken-3">There are <span class="red-text text-darken-4">{{ count }}</span> words in your text</h2>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s12">
-                            <h1>Your Text:</h1>
+                            <h1 class="cyan-text text-darken-3">Your Text:</h1>
                             <blockquote style="text-align: justify;">{{ fulltext }}</blockquote>
+                        </div>
+
+                        <div class="section">
+                            <a href="{% url 'words' %}" class="waves-effect waves-light btn-small">Change Text</a>
                         </div>
                     </div>
                 </div>
                 <div class="col s5">
                     <div class="row">
                         <div class="col s12">
-                            <h1 class="center-align">Word Count</h1>
+                            <h1 class="cyan-text text-darken-3 center-align">Word Count</h1>
 
                             <table class="highlight centered" style="table-layout: fixed">
                             {% for word, count in previewList %}
                                 <tr>
-                                    <td class="flow-text">{{ word }}</td>
-                                    <td class="flow-text">{{ count }}</td>
+                                    <td class="flow-text cyan-text text-darken-4">{{ word }}</td>
+                                    <td class="flow-text red-text text-darken-3">{{ count }}</td>
                                 </tr>
                             {% endfor %}
                             </table>
@@ -68,8 +72,8 @@
                                     <table class="highlight centered" style="table-layout: fixed">
                                     {% for word, count in fullList %}
                                         <tr>
-                                            <td class="flow-text">{{ word }}</td>
-                                            <td class="flow-text">{{ count }}</td>
+                                            <td class="flow-text cyan-text text-darken-4">{{ word }}</td>
+                                            <td class="flow-text red-text text-darken-3">{{ count }}</td>
                                         </tr>
                                     {% endfor %}
                                     </table>

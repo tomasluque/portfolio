@@ -16,7 +16,7 @@ def count(request):
         value = string.lower()
         if value in worddictionary:
             worddictionary[value] += 1
-        else:
+        elif value != '':
             worddictionary[value] = 1
     sortedwords = sorted(worddictionary.items(), key=operator.itemgetter(1), reverse=True)
     previewList = sortedwords[:10]
