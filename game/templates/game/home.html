@@ -8,9 +8,8 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">      
 	
 	<link rel="stylesheet" href="{% static 'css/materialize.css' %}">
-    <link rel="stylesheet" href="{% static 'css/transition.css' %}">
+	<link rel="stylesheet" href="{% static 'css/gameStyle.css' %}">
 	
-	<script src="{% static 'js/vue.js' %}"></script>
 </head>
 <body>
 	<header>
@@ -26,84 +25,102 @@
 		</nav>
 	</header>
 	
-	<div id="app">		
+	<main id="app">
+		<div class="container">
+			<div class="container center-align" id="controls">
+				<button class="btn btn-large">Hello this is a button</button>
+			</div>
 
-		<transition name="fade">
-			<div class="container mt-5" id="firstMenu" v-if="isActive == 'firstMenu'">
-				<div class="row">
-					<div class="col">
-						<button type="button" class="btn btn-info btn-lg btn-block" @click="changeMenu('secondMenu')">Start Game</button>
+			<div class="container center-align" id="board">
+				<!-- first row -->
+				<div class="square">
+					<div class="content">
+						<div class="table">
+							<div class="table-cell">
+								1
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="square">
+					<div class="content">
+						<div class="table">
+							<div class="table-cell">
+								2
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="square">
+					<div class="content">
+						<div class="table">
+							<div class="table-cell">
+								3
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- second row -->
+				<div class="square">
+					<div class="content">
+						<div class="table">
+							<div class="table-cell">
+								4
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="square">
+					<div class="content">
+						<div class="table">
+							<div class="blue table-cell">
+								5
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="square">
+					<div class="content">
+						<div class="table">
+							<div class="table-cell">
+								6
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- third row -->
+				<div class="square">
+					<div class="content">
+						<div class="table">
+							<div class="table-cell">
+								7
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="square">
+					<div class="content">
+						<div class="table">
+							<div class="table-cell">
+								8
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="square">
+					<div class="content">
+						<div class="table">
+							<div class="table-cell">
+								9
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</transition>
-
-		<transition name="fade">
-			<div class="container mt-5" id="secondMenu" v-if="isActive == 'secondMenu'">
-				<div class="row">
-					<div class="col">
-						<button type="button" class="btn btn-info btn-lg btn-block" @click="changeMenu('thirdMenuSolo')">1 Player</button>
-					</div>
-					<div class="col">
-						<button type="button" class="btn btn-info btn-lg btn-block" @click="changeMenu('thirdMenuMulti')">2 Players</button>
-					</div>
-				</div>
-			</div>
-		</transition>
-
-		<template  v-if="isActive == 'thirdMenuSolo'">
-			<transition name="fade">
-				<div class="container mt-5" id="thirdMenuSolo">
-					<div class="row">
-						<div class="col-md-6">
-							<button type="button" class="btn btn-info btn-lg btn-block" @click="changeMenu('firstMenu')">End Game</button>
-						</div>
-						<div class="col">
-							<button type="button" class="btn btn-outline-success btn-lg btn-block" disabled>${ wSolo }$ W</button>
-						</div>
-						<div class="col">
-							<button type="button" class="btn btn-outline-danger btn-lg btn-block" disabled>${ lSolo }$ L</button>
-						</div>
-							<div class="col">
-						<button type="button" class="btn btn-outline-secondary btn-lg btn-block" disabled>${ dSolo }$ D</button>
-						</div>
-					</div>
-				</div>
-			</transition>
-		</template>
-		
-		<template  v-if="isActive == 'thirdMenuMulti'">
-			<transition name="fade">
-				<div class="container mt-5" id="thirdMenuMulti">
-					<div class="row">
-							<div class="col-md-6">
-								<button type="button" class="btn btn-info btn-lg btn-block" @click="changeMenu('firstMenu')">End Game</button>
-							</div>
-							<div class="col">
-								<button type="button" class="btn btn btn-outline-primary btn-lg btn-block" disabled>P1: ${ wMulti }$</button>
-							</div>
-							<div class="col">
-								<button type="button" class="btn btn-outline-danger btn-lg btn-block" disabled>P2: ${ lMulti }$</button>
-							</div>
-							<div class="col">
-								<button type="button" class="btn btn-outline-secondary btn-lg btn-block" disabled>D: ${ dMulti }$</button>
-							</div>
-					</div>
-				</div>
-			</transition>
-		</template>
-
-		<div id="gameBoard"></div>
-
-
-		<button @click="wSolo++">sw</button>
-		<button @click="lSolo++">sl</button>
-		<button @click="dSolo++">sd</button>
-		<button @click="wMulti++">mw</button>
-		<button @click="lMulti++">ml</button>
-		<button @click="dMulti++">md</button>
-
-	</div>
+		</div>
+	</main>
 
 	<footer class="center-align">
 			<div>
@@ -112,6 +129,8 @@
 		</footer>
 		
 		<script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
-		<script src="{% static 'js/game.js' %}"></script>
+		<script src="{% static 'js/vue.js' %}"></script>
+		<script src="{% static 'js/oxo.js' %}"></script>
+
 	</body>
 	</html>
