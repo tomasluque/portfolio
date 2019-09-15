@@ -3,7 +3,7 @@
     {% load staticfiles %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>OXO</title>
+    <title>Tic-Tac-Toe</title>
 	
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">      
 	
@@ -28,98 +28,108 @@
 	<main id="app">
 		<div class="container">
 			<div class="container center-align" id="controls">
-				<button class="btn btn-large">Hello this is a button</button>
+				<button class="btn btn-large blue lighten-2" @click="startGame" v-if="game.showStartBtn">Start Game</button>
+				<button class="btn btn-large deep-orange lighten-2" @click="endGame" v-if="game.showEndBtn">Stop Game</button>
 			</div>
 
-			<div class="container center-align" id="board">
+			<div class="container center-align scale-transition scale-out" 
+				v-bind:class="{'scale-in':game.showBoard}"
+				id="board">
 				<!-- first row -->
-				<div class="square">
+				<div class="square hoverable" id="c1"  @click="choseCell($event)">
 					<div class="content">
 						<div class="table">
 							<div class="table-cell">
-								1
+								
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="square">
+				<div class="square hoverable" id="c2" @click="choseCell($event)">
 					<div class="content">
 						<div class="table">
 							<div class="table-cell">
-								2
+								
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="square">
+				<div class="square hoverable" id="c3"  @click="choseCell($event)">
 					<div class="content">
 						<div class="table">
 							<div class="table-cell">
-								3
+								
 							</div>
 						</div>
 					</div>
 				</div>
 				
 				<!-- second row -->
-				<div class="square">
+				<div class="square hoverable" id="c4" @click="choseCell($event)">
 					<div class="content">
 						<div class="table">
 							<div class="table-cell">
-								4
+								
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="square">
+				<div class="square hoverable" id="c5" @click="choseCell($event)">
 					<div class="content">
 						<div class="table">
-							<div class="blue table-cell">
-								5
+							<div class="table-cell">
+								
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="square">
+				<div class="square hoverable" id="c6" @click="choseCell($event)">
 					<div class="content">
 						<div class="table">
 							<div class="table-cell">
-								6
+								
 							</div>
 						</div>
 					</div>
 				</div>
 				
 				<!-- third row -->
-				<div class="square">
+				<div class="square hoverable" id="c7" @click="choseCell($event)">
 					<div class="content">
 						<div class="table">
 							<div class="table-cell">
-								7
+								
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="square">
+				<div class="square hoverable" id="c8" @click="choseCell($event)">
 					<div class="content">
 						<div class="table">
 							<div class="table-cell">
-								8
+								
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="square">
+				<div class="square hoverable" id="c9" @click="choseCell($event)">
 					<div class="content">
 						<div class="table">
 							<div class="table-cell">
-								9
+								
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		<div class="container center-align scale-transition scale-out" 
+			v-bind:class="{'scale-in':game.showText}"
+			id="endText">
+			<h1 v-if="" class="red"></h1>
+		</div>
+		
 	</main>
 
 	<footer class="center-align">
@@ -130,7 +140,131 @@
 		
 		<script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
 		<script src="{% static 'js/vue.js' %}"></script>
-		<script src="{% static 'js/oxo.js' %}"></script>
+		<script>
+			new Vue({
+				el: '#app',
+				data: {
+					'player1': {
+						'color': 'amber',
+						'cells': []
+					},
+					'player2': {
+						'color': 'cyan',
+						'cells': []
+					},
+					'game': {
+						'showStartBtn': true,
+						'showEndBtn': false,
+						'showBoard': false,
+						'isPlayerTurn': true,
+						'showText': false
+					},
+				},
+				computed: {
+					currentPlayer: function() {
+						if (this.game.isPlayerTurn) {
+							return this.player1;
+						}
+						return this.player2;
+					},
+					otherPlayer: function() {
+						if (this.game.isPlayerTurn) {
+							return this.player2;
+						}
+						return this.player1;
+					},
+					cellNb: function() {
+						/* Number of played cells */
+						var p1 = this.player1.cells.length;
+						var p2 = this.player2.cells.length;
 
+						return eval(p1+p2);
+					}, 
+					hasWon: function() {
+						var win_cond = [
+							['c1','c2','c3'],
+							['c4','c5','c6'],
+							['c7','c8','c9'],
+							['c1','c4','c7'],
+							['c2','c5','c8'],
+							['c3','c6','c9'],
+							['c1','c5','c9'],
+							['c3','c5','c7']
+						]
+
+						for (var i=0;i<win_cond.length;i++) {
+							var success = win_cond[i].every((val) => this.currentPlayer.cells.includes(val));			
+							if (success) {
+								return true;
+							}
+						}
+						return false;
+					}
+				},
+				methods: {
+					startGame: function() {
+						this.game.showBoard = true;
+						this.game.showEndBtn = true;
+						this.game.showStartBtn = false;
+						this.game.isPlayerTurn = true;
+					},
+					endGame: function() {
+						this.game.showBoard = false;
+						this.game.showEndBtn = false;
+						this.game.showStartBtn = true;
+
+						var myNode = document.getElementById('board');
+						var children = myNode.children
+						var player1 = this.player1.color;
+						var player2 = this.player2.color;
+
+						for (var i=0;i<children.length;i++) {
+							if (children[i].classList.contains(player1)) 
+								{ children[i].classList.remove(player1);
+							} else if (children[i].classList.contains(player2)) {
+								children[i].classList.remove(player2); 
+							}
+						}
+						this.player1.cells = [];
+						this.player2.cells = [];						
+					},
+					changeTurn: function() {
+						this.game.isPlayerTurn = !this.game.isPlayerTurn;
+					},
+					choseCell: function(event) {
+						var elem = event.target;						
+						while (!elem.classList.contains('square')) {
+							elem = elem.parentElement;							
+						}
+						if (!this.currentPlayer.cells.includes(elem.id) 
+							&& !this.otherPlayer.cells.includes(elem.id)) { 							
+							elem.classList.add(this.currentPlayer.color);	
+							this.currentPlayer.cells.push(elem.id);
+							
+							console.log(this.hasWon);
+							this.checkBoard();										
+						}					
+					},
+					checkBoard: function() {
+
+						if (this.cellNb>=3) {
+							if (this.hasWon) {
+								(this.game.isPlayerTurn)?alert("You've won !"):alert("You've lost !");
+								this.endGame();
+							} else {
+								if(this.cellNb<9) {
+									this.changeTurn();
+								} else {
+									alert("It's a draw !");
+									this.endGame();
+								}
+							}
+						} else {
+							this.changeTurn();
+						}
+					}
+				}
+			});
+		</script>
 	</body>
 	</html>
