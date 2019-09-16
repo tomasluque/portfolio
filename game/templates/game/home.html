@@ -156,19 +156,19 @@
 						'showStartBtn': true,
 						'showEndBtn': false,
 						'showBoard': false,
-						'isPlayerTurn': true,
 						'showText': false
 					},
+					'isPlayerTurn': true
 				},
 				computed: {
 					currentPlayer: function() {
-						if (this.game.isPlayerTurn) {
+						if (this.isPlayerTurn) {
 							return this.player1;
 						}
 						return this.player2;
 					},
 					otherPlayer: function() {
-						if (this.game.isPlayerTurn) {
+						if (this.isPlayerTurn) {
 							return this.player2;
 						}
 						return this.player1;
@@ -201,12 +201,19 @@
 						return false;
 					}
 				},
+				watch: {
+					isPlayerTurn: function() {
+						if (!this.isPlayerTurn) {
+							this.choseRandomCell();
+						}
+					} 
+				},
 				methods: {
 					startGame: function() {
 						this.game.showBoard = true;
 						this.game.showEndBtn = true;
 						this.game.showStartBtn = false;
-						this.game.isPlayerTurn = true;
+						this.isPlayerTurn = true;
 					},
 					endGame: function() {
 						this.game.showBoard = false;
@@ -229,7 +236,7 @@
 						this.player2.cells = [];						
 					},
 					changeTurn: function() {
-						this.game.isPlayerTurn = !this.game.isPlayerTurn;
+						this.isPlayerTurn = !this.isPlayerTurn;
 					},
 					choseCell: function(event) {
 						var elem = event.target;						
@@ -241,7 +248,6 @@
 							elem.classList.add(this.currentPlayer.color);	
 							this.currentPlayer.cells.push(elem.id);
 							
-							console.log(this.hasWon);
 							this.checkBoard();										
 						}					
 					},
@@ -249,7 +255,7 @@
 
 						if (this.cellNb>=3) {
 							if (this.hasWon) {
-								(this.game.isPlayerTurn)?alert("You've won !"):alert("You've lost !");
+								(this.isPlayerTurn)?alert("You've won !"):alert("You've lost !");
 								this.endGame();
 							} else {
 								if(this.cellNb<9) {
@@ -262,6 +268,27 @@
 						} else {
 							this.changeTurn();
 						}
+					},
+					choseRandomCell: function() {
+						var cellList = ['c1','c2','c3','c4','c5','c6','c7','c8','c9'];
+											
+						var randomNb;
+						var elemID;
+						var elem;
+						var that = this;
+
+						do { 							
+							randomNb = Math.floor(Math.random() * (9 - 1) + 1);
+							elemID = cellList[randomNb];
+							elem = document.getElementById(elemID);
+							console.log(elem);									
+						} while (this.currentPlayer.cells.includes(elem.id) || this.otherPlayer.cells.includes(elem.id)) 							
+						
+						setTimeout(function() { 
+							elem.classList.add(that.currentPlayer.color);	
+							that.currentPlayer.cells.push(elem.id);							
+							that.checkBoard();
+						}, 500);
 					}
 				}
 			});
