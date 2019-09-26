@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<title>{% block title %}my title{% endblock %}</title>
+
+	<!-- CSS  -->
+	<link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet"/>
+	<link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet"/>
+	
+
+	<!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,400i,700,700i">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,300">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+	{% block header %}
+	<header class="header">
+		<nav>
+			<div class="container nav-container">
+				<div class="nav-wrapper">
+					<a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons" id="trigger">menu</i></a>
+					<a href="#" class="brand-logo center">Logo.</a>
+					<ul class="left hide-on-med-and-down">
+						<li><a href="index.html">Menu 1</a></li>
+						<li><a href="index2.html">Menu 2</a></li>
+						<li><a href="">Menu 3</a></li>
+					</ul>
+					<ul id="nav-right" class="right hide-on-med-and-down">
+						<li><a href=""><i class="material-icons">exit_to_app</i></a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<ul class="sidenav" id="mobile">
+				<li><a href="index.html">Menu 1</a></li>
+				<li><a href="index2.html">Menu 2</a></li>
+				<li><a href="">Menu 3</a></li>
+				<li><a href=""><i class="material-icons">exit_to_app</i></a></li>
+		</ul>
+	</header>
+	{% endblock %}		
+	<main>
+        {% block content %}
+            <h1>No content :(</h1>
+        {% endblock %}
+	</main>
+
+
+    {% block footer %}
+	<footer class="page-footer">
+		<div class="footer-copyright">
+			<div class="container center">
+				<a class="underline">Some movie quote.</a>
+			</div>
+		</div>
+    </footer> 
+    {% endblock %}
+    {% block script %}
+	<!--  Scripts-->
+	<script src="{% static 'js/materialize.js' %}"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var elems = document.querySelectorAll('.sidenav');
+			var instances = M.Sidenav.init(elems);
+		});
+  	</script>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %}
+{% load staticfiles %}
+{% block title %}Blog my ass, fuck yeah!{% endblock %}		
+
+{% block content %}
+<!-- random quote here -->
+<div id="quoteMyActor" class="blockquote-wrapper">
+    <div class="blockquote">
+        <h1>Can you bring me my iphone ? I need to snap this shit.</h1>
+        <h4>&mdash; John Wayne</h4>
+    </div>
+</div>
+
+<div class="divider container"></div>
+
+<!-- articles go here -->
+<div class="container blog-grid">
+    <div class="row">
+        <div class="blog-article">
+            <div class="blog-article-inner">                        
+                <div class="blog-article-cover">
+                    <a href="">
+                        <picture>
+                            <img src="{% static 'gridPic.jpg' %}" class="responsive-img hide-on-med-and-down">
+                            <img src="{% static 'gridPic-small.jpg' %}" class="responsive-img hide-on-large-only">
+                        </picture>
+                    </a>
+                </div>
+                <div class="blog-article-content">
+                    <a href="">
+                        <p class="blog-article-title">Un gouvernement autoritaire pourrait-il sauver la planète?</p>
+                    </a>
+                    <p class="blog-article-text">Spoiler: comme l'illustre le cas chinois, non.</p>
+                    <p class="blog-article-date">
+                        <span>24 septembre 2019</span>
+                    </p>
+                </div>
+            </div>
+        </div>       
+    </div>    
+</div>
+{% endblock %}	
