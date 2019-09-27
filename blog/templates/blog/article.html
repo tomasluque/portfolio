@@ -1,0 +1,43 @@
+{% extends "blog/base.html" %}
+{% load staticfiles %}
+{% block title %}this is a test{% endblock %}
+{% block content %}
+<article>
+    <!-- cover picture -->
+    <div>
+        <figure class="article-cover">
+            <img src="{{ article.articlePic_l.url }}" class="responsive-img hide-on-med-and-down">
+            <img src="{{ article.articlePic_s.url }}" class="responsive-img hide-on-large-only">
+            <figcaption class="legend-container">
+                <div class="legend">
+                    <span class="caption-picture">{{ article.picture_caption }}</span>
+                </div>								  
+            </figcaption>
+        </figure>
+    </div>
+    <!-- article title -->
+    <div class="article-header container">
+        <h1 class="article-header-title">
+            {{ article.title }}
+        </h1>
+        <h2 class="article-header-subtitle">
+            {{ article.summary }}
+        </h2>
+        <p class="article-header-date">
+            {{ article.pub_date_pretty }} - <span class="author">Tomas Luque Gonzalez</span>
+        </p>
+    </div>
+
+    <!-- article content -->
+    <div class="article-content">
+            {{ article.body |safe }}
+
+            <div class="article-conclusion">
+                <span>In conclusion</span>
+                <p>{{ article.conclusion }}</p>
+            </div>
+    </div>
+    <div class="end-of-article"></div>
+</article>
+
+{% endblock %}

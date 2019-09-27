@@ -16,10 +16,11 @@
 <!-- articles go here -->
 <div class="container blog-grid">
     <div class="row">
+        {% for post in blog.all %}
         <div class="blog-article">
             <div class="blog-article-inner">                        
                 <div class="blog-article-cover">
-                    <a href="">
+                    <a href="{% url 'article' post.slug %}">
                         <picture>
                             <img src="{% static 'gridPic.jpg' %}" class="responsive-img hide-on-med-and-down">
                             <img src="{% static 'gridPic-small.jpg' %}" class="responsive-img hide-on-large-only">
@@ -27,16 +28,18 @@
                     </a>
                 </div>
                 <div class="blog-article-content">
-                    <a href="">
-                        <p class="blog-article-title">Un gouvernement autoritaire pourrait-il sauver la planète?</p>
+                    <a href="{% url 'article' post.slug %}">
+                            
+                        <p class="blog-article-title">{{post.title}}</p>
                     </a>
-                    <p class="blog-article-text">Spoiler: comme l'illustre le cas chinois, non.</p>
+                    <p class="blog-article-text">{{post.summary |safe }}</p>
                     <p class="blog-article-date">
-                        <span>24 septembre 2019</span>
+                        <span>{{post.pub_date_pretty}}</span>
                     </p>
                 </div>
             </div>
-        </div>       
+        </div>
+        {% endfor %}       
     </div>    
 </div>
 {% endblock %}	
