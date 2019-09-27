@@ -6,8 +6,8 @@
 <!-- random quote here -->
 <div id="quoteMyActor" class="blockquote-wrapper">
     <div class="blockquote">
-        <h1>Can you bring me my iphone ? I need to snap this shit.</h1>
-        <h4>&mdash; John Wayne</h4>
+        <h1>{{ quote_content }}</h1>
+        <h4>&mdash; {{ quote_author }}</h4>
     </div>
 </div>
 
@@ -42,4 +42,5 @@
         {% endfor %}       
     </div>    
 </div>
-{% endblock %}	
+{% endblock %}
+{% block movieline %}{{ bottomline }}{% endblock %}
