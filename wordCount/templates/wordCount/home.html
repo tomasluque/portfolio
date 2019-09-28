@@ -11,19 +11,23 @@
     <link rel="stylesheet" href="{% static 'css/jobStyle.css' %}">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="nav-wrapper container">
-                <a class="brand-logo" href="{% url 'home' %}">Tomas Luque</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="https://twitter.com/T_LuGon" target="_blank">Twitter</a></li>
-                        <li><a href="{% static 'resume.pdf' %}" target="_blank">Resume</a></li>
-                        <li><a href="{% url 'allblogs' %}">Blog</a></li>
-                </ul>                
-            </div>
-        </nav>
-    </header>
-
+        <header>
+            <nav>
+                <div class="nav-wrapper container">
+                    <a class="brand-logo" href="{% url 'home' %}">Tomas Luque</a>
+                    <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>          
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <li><a href="https://twitter.com/T_LuGon" target="_blank">Twitter</a></li>
+                            <li><a href="{% static 'resume.pdf' %}" target="_blank">Resume</a></li>
+                            <li><a href="{% url 'allblogs' %}">Blog</a></li>
+                    </ul>                
+                </div>
+            </nav>
+    
+            <ul class="sidenav" id="mobile">
+                <li><a href="{% url 'home' %}">Go Back</a></li>
+            </ul>
+        </header>
     <main>
 
         <div class="container">
@@ -112,6 +116,12 @@
             field.value = "Dwarf rabbit refers either to a rabbit with the dwarfing gene, or to any small breed of domestic rabbit or specimen thereof, or to any small rabbit. Dwarfism is a genetic condition that may occur in humans and in many animals, including rabbits. True dwarfism is often associated with a cluster of physical abnormalities, including pituitary dwarfism. The process of dwarfing is used to selectively breed for smaller stature with each generation. Small stature is a characteristic of neoteny, which may account (in part) for the attraction of dwarf animals.";
             form.submit();
         }     
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+        });
     </script>
 </body>
 </html>

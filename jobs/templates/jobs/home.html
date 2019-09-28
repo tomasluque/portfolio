@@ -23,6 +23,7 @@
         <nav>
             <div class="nav-wrapper container">
                 <a class="brand-logo" href="{% url 'home' %}">Tomas Luque</a>
+                <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>          
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li><a href="https://twitter.com/T_LuGon" target="_blank">Twitter</a></li>
                         <li><a href="{% static 'resume.pdf' %}" target="_blank">Resume</a></li>
@@ -30,6 +31,13 @@
                 </ul>                
             </div>
         </nav>
+
+        <ul class="sidenav" id="mobile">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="https://twitter.com/T_LuGon" target="_blank">Twitter</a></li>
+            <li><a href="{% static 'resume.pdf' %}" target="_blank">Resume</a></li>
+            <li><a href="{% url 'allblogs' %}">Blog</a></li>
+        </ul>
     </header>
 
     <main role="main" id="app">
@@ -83,7 +91,7 @@
                 <div class="row">
                     {% for job in jobs.all %}
 
-                    <div class="col s4"> 
+                    <div class="col s12 m4 l4"> 
                         <div class="card hoverable">
                             <div class="card-image">
                                 <img src="{{job.image.url}}">
@@ -115,6 +123,12 @@
             data: {
                 isMoving: true
             }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
         });
     </script>
 </body>
