@@ -12,18 +12,24 @@
 	
 </head>
 <body>
-	<header>
-		<nav>
-			<div class="nav-wrapper container">
-				<a class="brand-logo" href="{% url 'home' %}">Tomas Luque</a>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-						<li><a href="https://twitter.com/T_LuGon" target="_blank">Twitter</a></li>
-						<li><a href="{% static 'resume.pdf' %}" target="_blank">Resume</a></li>
-						<li><a href="{% url 'allblogs' %}">Blog</a></li>
-				</ul>                
-			</div>
-		</nav>
-	</header>
+    <header>
+        <nav>
+            <div class="nav-wrapper container">
+                <a class="brand-logo" href="{% url 'home' %}">Tomas Luque</a>
+                <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>          
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="https://twitter.com/T_LuGon" target="_blank">Twitter</a></li>
+                        <li><a href="https://github.com/tomasluque" target="_blank">GitHub</a></li>
+                        <li><a href="{% static 'resume.pdf' %}" target="_blank">Resume</a></li>
+                        <li><a href="{% url 'allblogs' %}">Blog</a></li>
+                </ul>                
+            </div>
+        </nav>
+
+        <ul class="sidenav" id="mobile">
+            <li><a href="{% url 'home' %}">Back</a></li>
+        </ul>
+    </header>
 	
 	<main id="app">
 		<div class="container">
@@ -293,5 +299,11 @@
 				}
 			});
 		</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+        });
+    </script>
 	</body>
 	</html>
