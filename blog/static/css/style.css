@@ -729,3 +729,20 @@ nav .sidenav-trigger {
 	float: none;
 	font-size: 6rem !important;
 }
+
+.modal-content {
+	font-family: 'PT Sans',sans-serif;    
+    font-size: 2.4rem;
+    line-height: 3.4rem;
+    margin: 0 auto;
+	color: #292a2b;
+	word-wrap: break-word;
+}
+
+.modal-content h4 {
+	text-align: center;
+	font-size: 3rem;
+	font-weight: 700;
+	color: #ef5350;
+	margin-bottom: 5rem;
+}

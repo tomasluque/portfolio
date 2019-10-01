@@ -29,7 +29,7 @@
 					<a href="{% url 'allblogs' %}" class="brand-logo center">Cinema.</a>
 					<ul class="left hide-on-med-and-down">
 						<li><a href="{% url 'allblogs' %}">Home</a></li>
-						<li><a href="">About</a></li>
+						<li><a class="modal-trigger" href="#aboutModal">About</a></li>
 					</ul>
 					<ul id="nav-right" class="right hide-on-med-and-down">
 						<li><a href="{% url 'home' %}" title="Leave The Blog ?"><i class="material-icons">exit_to_app</i></a></li>
@@ -38,9 +38,18 @@
 			</div>
 		</nav>
 
+		<div id="aboutModal" class="modal bottom-sheet">
+			<div class="modal-content">
+				<div class="container">
+				<h4>What's this blog about ?</h4>
+				<p>Welcome to my blog !<br> The name's Tomas and, if you couldn't guess by now, I love bad movies. Well, I like good movies too but, as someone once said :<em> I have a tender spot in my heart for cripples and bastards and broken things</em>.<br>So, you can expect a bunch of bad movies reviews, a good one now and them, and others things I wanna talk about. After all : my blog, my topics ! Right ?</p>
+				</div>
+			</div>
+		</div>
+
 		<ul class="sidenav" id="mobile">
 			<li><a href="{% url 'allblogs' %}">Home</a></li>
-			<li><a href="">About</a></li>
+			<li><a class="modal-trigger" href="#aboutModal">About</a></li>
 			<li><a href="{% url 'home' %}" title="Leave The Blog ?"><i class="material-icons">exit_to_app</i></a></li>
 		</ul>
 	</header>
@@ -68,6 +77,10 @@
 		document.addEventListener('DOMContentLoaded', function() {
 			var elems = document.querySelectorAll('.sidenav');
 			var instances = M.Sidenav.init(elems);
+		});
+		document.addEventListener('DOMContentLoaded', function() {
+			var elems = document.querySelectorAll('.modal');
+			var instances = M.Modal.init(elems);
 		});
   	</script>
     {% endblock %}
