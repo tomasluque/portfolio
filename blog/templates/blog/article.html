@@ -1,6 +1,6 @@
 {% extends "blog/base.html" %}
 {% load staticfiles %}
-{% block title %}this is a test{% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
 {% block content %}
 <article>
     <!-- cover picture -->
@@ -21,7 +21,7 @@
             {{ article.title }}
         </h1>
         <h2 class="article-header-subtitle">
-            {{ article.summary }}
+            {{ article.summary |safe }}
         </h2>
         <p class="article-header-date">
             {{ article.pub_date_pretty }} - <span class="author">Tomas Luque Gonzalez</span>

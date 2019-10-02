@@ -22,8 +22,8 @@
                 <div class="blog-article-cover">
                     <a href="{% url 'article' post.slug %}">
                         <picture>
-                            <img src="{% static 'gridPic.jpg' %}" class="responsive-img hide-on-med-and-down">
-                            <img src="{% static 'gridPic-small.jpg' %}" class="responsive-img hide-on-large-only">
+                            <img src="{{ post.gridPic_l.url }}" class="responsive-img hide-on-med-and-down">
+                            <img src="{{ post.gridPic_s.url }}" class="responsive-img hide-on-large-only">
                         </picture>
                     </a>
                 </div>
